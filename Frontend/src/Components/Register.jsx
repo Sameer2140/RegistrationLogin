@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [username, setUsername] = useState(""); // Username state
-    const [emailId, setEmailId] = useState(""); // Email state
     const [password, setPassword] = useState(""); // Password state
     const navigate = useNavigate(); // React Router navigation hook
 
@@ -13,9 +12,7 @@ function Register() {
     };
 
     // Handles email input change
-    const handleEmailChange = (e) => {
-        setEmailId(e.target.value);
-    };
+   
 
     // Handles password input change
     const handlePasswordChange = (e) => {
@@ -25,7 +22,7 @@ function Register() {
     // Handles form submission
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevents default form behavior
-        const data = { username, emailId, password };
+        const data = { username,  password };
 
         try {
             const response = await fetch("http://localhost:8082/register", {
@@ -38,6 +35,8 @@ function Register() {
             });
 
             const result = await response.json();
+            console.log("Registration result:", result);
+            
 
             if (result) {
                 alert("Registration successful");
@@ -65,15 +64,7 @@ function Register() {
                     />
                     <br />
                     <br />
-                    <label>Email ID</label>
-                    <input
-                        type="email"
-                        placeholder="Enter Email ID"
-                        value={emailId}
-                        onChange={handleEmailChange}
-                        required
-                    />
-                    <br />
+
                     <br />
                     <label>Password</label>
                     <input
